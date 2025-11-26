@@ -10,6 +10,13 @@ import { WishlistsModule } from './wishlists/wishlists.module';
 import { OffersModule } from './offers/offers.module';
 import { AuthModule } from './auth/auth.module';
 
+import * as nodeCrypto from 'crypto';
+
+if (!(globalThis as any).crypto) {
+  (globalThis as any).crypto =
+    (nodeCrypto as any).webcrypto ?? nodeCrypto;
+}
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
